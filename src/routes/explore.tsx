@@ -22,15 +22,15 @@ export const Route = createFileRoute("/explore")({
 const filters = ["All", "Waterfalls", "Hiking", "Cafés", "Road trips", "Beaches", "Camping", "Date spots", "Wildlife", "Culture", "Budget"];
 
 const items = [
-  { t: "Sheldrick Falls", l: "Kwale", img: waterfall, b: "KES 1,500", d: "Half day", diff: "Moderate", tag: "Waterfall" },
-  { t: "Mt. Longonot Crater Rim", l: "Nakuru", img: hike, b: "KES 2,500", d: "Full day", diff: "Hard", tag: "Hiking" },
-  { t: "Wasp & Sprout", l: "Karen", img: cafe, b: "KES 1,800", d: "Brunch", diff: "Easy", tag: "Café" },
-  { t: "Watamu Marine Park", l: "Kilifi", img: beach, b: "KES 3,000", d: "Day trip", diff: "Easy", tag: "Beach" },
-  { t: "Magadi Salt Lake", l: "Kajiado", img: roadtrip, b: "KES 4,500", d: "Day trip", diff: "Easy", tag: "Road trip" },
-  { t: "Maasai Village Stay", l: "Narok", img: culture, b: "KES 6,000", d: "Overnight", diff: "Easy", tag: "Culture" },
-  { t: "Amboseli Game Drive", l: "Kajiado", img: wildlife, b: "KES 15,000", d: "2 days", diff: "Easy", tag: "Wildlife" },
-  { t: "Karura Hidden Pool", l: "Nairobi", img: waterfall, b: "KES 600", d: "Morning", diff: "Easy", tag: "Hidden gem" },
-  { t: "Ngong Hills Sunrise", l: "Kajiado", img: hike, b: "KES 1,200", d: "4 hrs", diff: "Moderate", tag: "Hiking" },
+  { t: "Sheldrick Falls", slug: "sheldrick-falls", l: "Kwale", img: waterfall, b: "KES 1,500", d: "Half day", diff: "Moderate", tag: "Waterfall" },
+  { t: "Mt. Longonot Crater Rim", slug: "mt-longonot", l: "Nakuru", img: hike, b: "KES 2,500", d: "Full day", diff: "Hard", tag: "Hiking" },
+  { t: "Wasp & Sprout", slug: "wasp-and-sprout", l: "Karen", img: cafe, b: "KES 1,800", d: "Brunch", diff: "Easy", tag: "Café" },
+  { t: "Watamu Marine Park", slug: "watamu-marine-park", l: "Kilifi", img: beach, b: "KES 3,000", d: "Day trip", diff: "Easy", tag: "Beach" },
+  { t: "Magadi Salt Lake", slug: "magadi-salt-lake", l: "Kajiado", img: roadtrip, b: "KES 4,500", d: "Day trip", diff: "Easy", tag: "Road trip" },
+  { t: "Maasai Village Stay", slug: "maasai-village-stay", l: "Narok", img: culture, b: "KES 6,000", d: "Overnight", diff: "Easy", tag: "Culture" },
+  { t: "Amboseli Game Drive", slug: "amboseli-game-drive", l: "Kajiado", img: wildlife, b: "KES 15,000", d: "2 days", diff: "Easy", tag: "Wildlife" },
+  { t: "Karura Hidden Pool", slug: "karura-hidden-pool", l: "Nairobi", img: waterfall, b: "KES 600", d: "Morning", diff: "Easy", tag: "Hidden gem" },
+  { t: "Ngong Hills Sunrise", slug: "ngong-hills-sunrise", l: "Kajiado", img: hike, b: "KES 1,200", d: "4 hrs", diff: "Moderate", tag: "Hiking" },
 ];
 
 function Explore() {
@@ -64,7 +64,7 @@ function Explore() {
 
       <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 [grid-auto-flow:dense]">
         {items.map((it, i) => (
-          <Link to="/explore" key={it.t} className={`group relative rounded-2xl overflow-hidden shadow-elegant block ${i % 5 === 0 ? "sm:row-span-2 aspect-[4/6]" : "aspect-[4/5]"}`}>
+          <Link to="/destination/$slug" params={{ slug: it.slug }} key={it.t} className={`group relative rounded-2xl overflow-hidden shadow-elegant block ${i % 5 === 0 ? "sm:row-span-2 aspect-[4/6]" : "aspect-[4/5]"}`}>
             <img src={it.img} alt={it.t} loading="lazy" className="absolute inset-0 h-full w-full object-cover group-hover:scale-110 transition-transform duration-700" />
             <div className="absolute inset-0 bg-gradient-card" />
             <div className="absolute top-3 left-3 right-3 flex justify-between">

@@ -355,7 +355,7 @@ function DestinationPage() {
               />
               <input
                 value={newUpdate} onChange={(e) => setNewUpdate(e.target.value)}
-                placeholder='e.g. "Bridge section flooded after last night\'s rain"'
+                placeholder={`e.g. "Bridge section flooded after last night's rain"`}
                 className="flex-1 bg-white/5 border border-border rounded-xl px-3 py-2 text-sm outline-none focus:border-primary"
               />
               <button onClick={submitUpdate} disabled={!newUpdate.trim()} className="px-4 py-2 rounded-xl bg-gradient-sunset text-primary-foreground text-sm font-medium disabled:opacity-50 flex items-center gap-1.5">

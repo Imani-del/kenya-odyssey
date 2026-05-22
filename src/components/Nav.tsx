@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { Compass, Map, Sparkles, Users, Menu } from "lucide-react";
+import { Compass, Map, Sparkles, Users, Menu, Shield, LogOut } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "@/lib/auth";
 
 const links = [
   { to: "/explore", label: "Explore", icon: Compass },
@@ -11,6 +12,7 @@ const links = [
 
 export function Nav() {
   const [open, setOpen] = useState(false);
+  const { user, isAdmin, signOut } = useAuth();
   return (
     <header className="fixed top-0 inset-x-0 z-50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-4">
@@ -33,9 +35,20 @@ export function Nav() {
             ))}
           </div>
           <div className="flex items-center gap-2">
-            <button className="hidden sm:inline-flex px-4 py-2 rounded-xl text-sm bg-gradient-sunset text-primary-foreground font-medium hover:opacity-90 transition shadow-glow">
-              Sign in
-            </button>
+            {isAdmin && (
+              <Link to="/admin" className="hidden sm:inline-flex px-3 py-2 rounded-xl text-sm bg-white/10 hover:bg-white/15 items-center gap-1.5">
+                <Shield className="size-4" /> Admin
+              </Link>
+            )}
+            {user ? (
+              <button onClick={() => signOut()} className="hidden sm:inline-flex px-4 py-2 rounded-xl text-sm glass-light hover:bg-white/10 items-center gap-1.5">
+                <LogOut className="size-4" /> Sign out
+              </button>
+            ) : (
+              <Link to="/auth" className="hidden sm:inline-flex px-4 py-2 rounded-xl text-sm bg-gradient-sunset text-primary-foreground font-medium hover:opacity-90 transition shadow-glow">
+                Sign in
+              </Link>
+            )}
             <button onClick={() => setOpen(!open)} className="md:hidden h-10 w-10 rounded-xl grid place-items-center bg-white/5 hover:bg-white/10" aria-label="Menu">
               <Menu className="size-5" />
             </button>

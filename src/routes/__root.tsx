@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { AuthProvider } from "@/lib/auth";
 
 import appCss from "../styles.css?url";
 
@@ -75,11 +76,13 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <Nav />
-      <main className="min-h-screen pt-20">
-        <Outlet />
-      </main>
-      <Footer />
+      <AuthProvider>
+        <Nav />
+        <main className="min-h-screen pt-20">
+          <Outlet />
+        </main>
+        <Footer />
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

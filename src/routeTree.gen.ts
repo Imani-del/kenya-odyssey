@@ -13,7 +13,10 @@ import { Route as PlanRouteImport } from './routes/plan'
 import { Route as MapRouteImport } from './routes/map'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as CommunityRouteImport } from './routes/community'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ItinerarySlugRouteImport } from './routes/itinerary.$slug'
 import { Route as DestinationSlugRouteImport } from './routes/destination.$slug'
 
 const PlanRoute = PlanRouteImport.update({
@@ -36,9 +39,24 @@ const CommunityRoute = CommunityRouteImport.update({
   path: '/community',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItinerarySlugRoute = ItinerarySlugRouteImport.update({
+  id: '/itinerary/$slug',
+  path: '/itinerary/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DestinationSlugRoute = DestinationSlugRouteImport.update({
@@ -49,57 +67,84 @@ const DestinationSlugRoute = DestinationSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/community': typeof CommunityRoute
   '/explore': typeof ExploreRoute
   '/map': typeof MapRoute
   '/plan': typeof PlanRoute
   '/destination/$slug': typeof DestinationSlugRoute
+  '/itinerary/$slug': typeof ItinerarySlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/community': typeof CommunityRoute
   '/explore': typeof ExploreRoute
   '/map': typeof MapRoute
   '/plan': typeof PlanRoute
   '/destination/$slug': typeof DestinationSlugRoute
+  '/itinerary/$slug': typeof ItinerarySlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/community': typeof CommunityRoute
   '/explore': typeof ExploreRoute
   '/map': typeof MapRoute
   '/plan': typeof PlanRoute
   '/destination/$slug': typeof DestinationSlugRoute
+  '/itinerary/$slug': typeof ItinerarySlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
+    | '/auth'
     | '/community'
     | '/explore'
     | '/map'
     | '/plan'
     | '/destination/$slug'
+    | '/itinerary/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/community' | '/explore' | '/map' | '/plan' | '/destination/$slug'
+  to:
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/community'
+    | '/explore'
+    | '/map'
+    | '/plan'
+    | '/destination/$slug'
+    | '/itinerary/$slug'
   id:
     | '__root__'
     | '/'
+    | '/admin'
+    | '/auth'
     | '/community'
     | '/explore'
     | '/map'
     | '/plan'
     | '/destination/$slug'
+    | '/itinerary/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  AuthRoute: typeof AuthRoute
   CommunityRoute: typeof CommunityRoute
   ExploreRoute: typeof ExploreRoute
   MapRoute: typeof MapRoute
   PlanRoute: typeof PlanRoute
   DestinationSlugRoute: typeof DestinationSlugRoute
+  ItinerarySlugRoute: typeof ItinerarySlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -132,11 +177,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CommunityRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/itinerary/$slug': {
+      id: '/itinerary/$slug'
+      path: '/itinerary/$slug'
+      fullPath: '/itinerary/$slug'
+      preLoaderRoute: typeof ItinerarySlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/destination/$slug': {
@@ -151,11 +217,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  AuthRoute: AuthRoute,
   CommunityRoute: CommunityRoute,
   ExploreRoute: ExploreRoute,
   MapRoute: MapRoute,
   PlanRoute: PlanRoute,
   DestinationSlugRoute: DestinationSlugRoute,
+  ItinerarySlugRoute: ItinerarySlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

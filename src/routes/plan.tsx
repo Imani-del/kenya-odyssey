@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { useMutation } from "@tanstack/react-query";
 import { generateItinerary, type ItineraryResult } from "@/lib/itinerary.functions";
-import { toast } from "sonner";
 
 export const Route = createFileRoute("/plan")({
   component: Plan,
@@ -41,7 +40,6 @@ function Plan() {
   };
   const mutation = useMutation<ItineraryResult, Error, PlanInput>({
     mutationFn: (input) => generate({ data: input }),
-    onError: (e) => toast.error(e.message ?? "Failed to generate itinerary"),
   });
   const result: ItineraryResult | undefined = mutation.data;
 

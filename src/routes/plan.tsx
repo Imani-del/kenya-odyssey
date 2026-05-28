@@ -15,15 +15,6 @@ export const Route = createFileRoute("/plan")({
   }),
 });
 
-const sample = [
-  { time: "06:30", title: "Pickup from Westlands", detail: "Uber XL · KES 1,200", icon: "🚐" },
-  { time: "08:00", title: "Hike Karura Forest waterfall loop", detail: "Easy · 2h · KES 600 entry", icon: "🌿" },
-  { time: "11:00", title: "Brunch at Wasp & Sprout", detail: "Karen · KES 1,800 pp", icon: "🥐" },
-  { time: "13:30", title: "Drive to Limuru tea fields", detail: "45 min · scenic route", icon: "🍃" },
-  { time: "15:00", title: "Hidden viewpoint at Kentmere", detail: "Photo stop · KES 400", icon: "📸" },
-  { time: "18:00", title: "Sunset at Tigoni dam", detail: "Free · bring a blanket", icon: "🌅" },
-];
-
 function Plan() {
   const [budget, setBudget] = useState("5000");
   const [people, setPeople] = useState("2");

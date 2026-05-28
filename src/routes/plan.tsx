@@ -32,9 +32,16 @@ function Plan() {
   const [vibe, setVibe] = useState("Nature & cafés");
   const [startingFrom, setStartingFrom] = useState("Nairobi");
   const generate = useServerFn(generateItinerary);
-  const mutation = useMutation({
-    mutationFn: (input: Parameters<typeof generate>[0]["data"]) => generate({ data: input }),
-    onError: (e: Error) => toast.error(e.message ?? "Failed to generate itinerary"),
+  type PlanInput = {
+    budget: number;
+    people: number;
+    days: number;
+    startingFrom: string;
+    vibe: string;
+  };
+  const mutation = useMutation<ItineraryResult, Error, PlanInput>({
+    mutationFn: (input) => generate({ data: input }),
+    onError: (e) => toast.error(e.message ?? "Failed to generate itinerary"),
   });
   const result: ItineraryResult | undefined = mutation.data;
 

@@ -130,6 +130,9 @@ function Plan() {
             {mutation.isPending && (
               <div className="mt-6 text-sm text-muted-foreground animate-pulse">Retrieving destinations and building your day…</div>
             )}
+            {mutation.error && (
+              <div className="mt-6 text-sm text-destructive">{mutation.error.message}</div>
+            )}
             {result && result.days.length === 0 && (
               <div className="mt-6 text-sm text-muted-foreground">No itinerary could be built from the current data. Try a different vibe or location.</div>
             )}
